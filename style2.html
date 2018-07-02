@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Vue中的样式绑定(另一种方法)</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div :style="styleObj" @click="handleDivClick">{{content}}</div>
+    <div :style="[styleObj,{fontSize: '28px'}]" @click="handleDivClick">{{content}}</div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        content: 'Hello Word',
+        styleObj: {
+          color: "black"
+        }
+
+      },
+      methods: {
+
+        handleDivClick: function () {
+          this.styleObj.color = this.styleObj.color === "black" ? "red" : "black"
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
