@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Vue实例生命周期函数</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+  </div>
+
+</body>
+<script>
+  //生命周期函数就是vue实例在某一个时间点会自动执行的函数
+  var vm = new Vue({
+    el: '#app',
+    template: '<div>{{text}} <button @click="handleUpdate">改变文字</button></div>',
+    data: {
+      text: 'Vue实例生命周期函数，请看控制台输出的信息'
+    },
+    methods: {
+      handleUpdate: function () {
+        this.text = "文字改变了~~~"
+      }
+    },
+    beforeCreate: function () {
+      console.log("【View初始化开始");
+      console.log("beforeCreate");
+    },
+    created: function () {
+      console.log("created");
+      console.log("View初始化完毕】");
+    },
+    beforeMount: function () {
+      console.log("数据挂载到页面-->开始挂载");
+      console.log(this.$el);
+      console.log("beforeMount");
+    },
+    mounted: function () {
+      console.log("mounted");
+      console.log(this.$el);
+      console.log("数据挂载到页面-->挂载完毕");
+    },
+    //以下两种生命周期 在控制台输入vm.$destroy()测试
+    beforeDestroy: function () {
+      console.log("当组件即将销毁.....beforeDestroy");
+    },
+    destroyed: function () {
+      console.log("当组件销毁完毕.....beforeDestroy");
+    },
+    beforeUpdate: function () {
+      console.log("数据发生改变，页面还未重新渲染.....beforeUpdate");
+    },
+    updated: function () {
+      console.log("数据发生改变，页面重新渲染完毕.....updated");
+    }
+
+
+  });
+</script>
+
+</html>
