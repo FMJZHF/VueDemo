@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Vue中的列表渲染</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div v-for="(item , index) of list" :key="item.id">
+      {{item.text}}----{{index}}
+
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        list: [{
+          id: "1001",
+          text: "hello"
+        }, {
+          id: "1002",
+          text: "word"
+        }]
+
+      }
+    });
+  </script>
+</body>
+
+</html>
