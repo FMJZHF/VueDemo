@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>组件使用中的小细节点</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <!-- 使用ref 起引用名 -->
+    <!-- <div ref="hello" @click="handleClick">点击查看效果</div> -->
+
+    点击数字查看结果
+    <br> 数字1：
+    <counter ref="one" @change="handleChange"></counter>
+    数字2：
+    <counter ref="two" @change="handleChange"></counter>
+    两数之和 =
+    <div>{{total}}</div>
+  </div>
+  <script>
+    Vue.component('counter', {
+      template: '<div @click="handleNumber">{{number}}</div>',
+      data: function () {
+        return {
+          number: 0
+        }
+      },
+      methods: {
+        handleNumber: function () {
+          this.number++
+            this.$emit('change')
+        }
+      }
+    });
+
+
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        total: 0
+      },
+      methods: {
+        /*
+        handleClick: function () {
+          // alert("ok")
+          // $refs : 指的是 所有的引用  获取domel节点
+          console.log("获取domel节点-->" + this.$refs.hello);
+          console.log("获取domel节点HTML-->" + this.$refs.hello.innerHTML);
+        }
+        */
+        handleChange: function () {
+          console.log("one = " + this.$refs.one.number + " ;  two = " + this.$refs.two.number);
+          this.total = this.$refs.one.number + this.$refs.two.number;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
