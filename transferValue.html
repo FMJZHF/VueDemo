@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>父子组件传值</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <!-- :count  添加 ":" 传递的值为数字，不添加 ":" 则是字符串  -->
+    <counter :count="3" @change="handleChange"></counter>
+    <counter :count="2" @change="handleChange"></counter>
+    <!--  使用自定义的change监听子组件传递的值 -->
+    <div>{{total}}</div>
+  </div>
+  <script>
+    //父组件往子组件传递参数,子组件不能直接进行修改,必须进行克隆才能进行修改
+    var counter = {
+      props: ['count'],
+      data: function () {
+        return {
+          number: this.count // 克隆参数
+        }
+      },
+      template: '<div @click="handleClick">{{number}}</div>',
+      methods: {
+        handleClick: function () {
+          this.number = this.number + 2; // 修改参数
+          this.$emit('change', 2); //子组件往父组件传值
+        }
+      }
+    }
+
+
+
+    var vm = new Vue({
+      el: '#root',
+      components: {
+        counter: counter
+      },
+      data: {
+        total: 5
+      },
+      methods: {
+        // 获取步长 ,并进行相加
+        handleChange: function (step) {
+          console.log("步长--->" + step);
+          this.total = this.total + step
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
