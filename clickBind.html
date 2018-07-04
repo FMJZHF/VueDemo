@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>给组件绑定原生事件</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <!-- 事件修饰符 native 这样可以使子组件直接调用父组件事件 
+    并不是自定义事件，而是原生点击事件-->
+    <child @click.native="handleClick"></child>
+
+  </div>
+  <script>
+    Vue.component('child', {
+      template: '<div>Child</div>'
+    });
+
+
+    var vm = new Vue({
+      el: '#root',
+      data: {
+
+      },
+      methods: {
+        handleClick: function () {
+          alert("click");
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
