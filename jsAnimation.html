@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Vue中velocity.js动画</title>
+  <script src="./vue.js"></script>
+  <script src="./js/velocity.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <transition name="fade" @before-enter="handleBeforeEnter" @enter="handleEnter" @after-enter="handleAfterEnter" @before-leave="handleBeforeEnter"
+      @leave="handleEnter" @after-leave="handleAfterEnter">
+
+      <div v-show="show">hello word</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        show: 'true'
+      },
+      methods: {
+        handleClick: function () {
+          this.show = !this.show
+        },
+        handleBeforeEnter: function (el) {
+          el.style.opacity = 0;
+        },
+        handleEnter: function (el, done) {
+          Velocity(el, {
+            opacity: 1
+          }, {
+            duration: 1000,
+            complete: done
+          });
+        },
+        handleAfterEnter: function (el) {
+          console.log("动画结束");
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
