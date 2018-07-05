@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Vue中的作用域插槽</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <child>
+      <!-- 父组件调用子组件给子组件传递了一个插槽（作用域插槽，必须是template包裹） -->
+      <!-- 接收的数据都放到了props中 -->
+      <template slot-scope="props">
+        <h1>{{props.item}} - hello </h1>
+      </template>
+
+    </child>
+  </div>
+  <script>
+    Vue.component('child', {
+      data: function () {
+        return {
+          list: [1, 2, 3, 4]
+        }
+      },
+      // 当子组件循环 使用作用域插槽
+      template: `<div>
+                    <ul>
+                      <slot v-for="item of list" 
+                       :item=item
+                       >
+                      </slot>
+                    </ul>
+                  </div>`,
+      methods: {
+
+      }
+    });
+
+
+
+    var vm = new Vue({
+      el: '#root',
+      data: {
+
+      },
+      methods: {
+
+      }
+    });
+  </script>
+</body>
+
+</html>
