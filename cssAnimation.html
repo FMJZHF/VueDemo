@@ -4,25 +4,16 @@
 <head>
   <meta charset="utf-8" />
   <title>Vue中CSS动画原理</title>
+  <link rel="stylesheet" type="text/css" href="./css/animate.css">
   <script src="./vue.js"></script>
-  <style>
-    .v-enter,
-    .v-leave-to {
-      opacity: 0;
-    }
 
-    .v-enter-active,
-    .v-leave-active {
-      transition: opacity 1s;
-    }
-  </style>
 </head>
 
 <body>
   <div id="root">
     <!-- 动画效果 必须使用transtion包裹 -->
-    <transition>
-      <div v-if="show">hello word</div>
+    <transition enter-active-class="animated swing" leave-active-class="animated rubberBand">
+      <div v-show="show">hello word</div>
     </transition>
     <button @click="handleClick">切换</button>
   </div>
